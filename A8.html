@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pobreza en México: CONEVAL (2008-2018)</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart', 'bar', 'geochart']});
+      google.charts.setOnLoadCallback(drawCharts);
+
+      function drawCharts() {
+        var tOptions = { 
+            titleTextStyle: { fontSize: 16, color: '#B5F3FF', bold: true },
+            backgroundColor: 'transparent',
+            legend: { position: 'bottom' }
+        };
+
+        // 1. Dinámica de Ingresos vs Pobreza
+        new google.visualization.ColumnChart(document.getElementById('chart1_div')).draw(
+            google.visualization.arrayToDataTable([
+                ['Año', 'Pobreza (%)', 'Ingreso Inf. Canasta'], 
+                ['2008', 44.4, 49.0], 
+                ['2018', 41.9, 48.8]
+            ]),
+            { ...tOptions, colors: ['#4285F4', '#795548'], title: 'Dinámica de Ingresos vs Pobreza' }
+        );
+
+        // 2. Evolución de Líneas de Bienestar
+        new google.visualization.LineChart(document.getElementById('chart2_div')).draw(
+            google.visualization.arrayToDataTable([
+                ['Año', 'Pobreza %', 'Pob. Extrema %'], 
+                ['2008', 44.4, 11.0], ['2010', 46.1, 11.3], ['2012', 45.5, 9.8], 
+                ['2014', 46.2, 9.5], ['2016', 43.6, 7.6], ['2018', 41.9, 7.4]
+            ]),
+            { ...tOptions, curveType: 'function', colors: ['#0F9D58', '#F4B400'], title: 'Evolución de Líneas de Bienestar' }
+        );
+
+        // 3. Brecha en Carencias Sociales
+        new google.visualization.BarChart(document.getElementById('chart3_div')).draw(
+            google.visualization.arrayToDataTable([
+                ['Carencia', '2008', '2018'], 
+                ['Educativo', 21.9, 16.9], 
+                ['Salud', 38.4, 16.2], 
+                ['Seguridad', 65.0, 57.3]
+            ]),
+            { ...tOptions, chartArea: {width: '50%'}, colors: ['#FF6B6B', '#3F51B5'], title: 'Brecha en Carencias Sociales' }
+        );
+
+        // 4. Intensidad de Pobreza
+        new google.visualization.PieChart(document.getElementById('chart4_div')).draw(
+            google.visualization.arrayToDataTable([
+                ['Grupo', 'Promedio carencias'], 
+                ['Pobreza', 2.2], ['Vulnerable', 1.8]
+            ]),
+            { ...tOptions, is3D: true, title: 'Intensidad de Pobreza' }
+        );
+
+        // 5. Top 10 Estados con Mayor Pobreza (2018)
+        new google.visualization.GeoChart(document.getElementById('chart5_div')).draw(
+            google.visualization.arrayToDataTable([
+                ['Estado', 'Pobreza 2018 (%)'],
+                [{v: 'MX-CHP', f: 'Chiapas'}, 76.4], [{v: 'MX-GRO', f: 'Guerrero'}, 66.5], [{v: 'MX-OAX', f: 'Oaxaca'}, 66.4],
+                [{v: 'MX-VER', f: 'Veracruz'}, 61.8], [{v: 'MX-PUE', f: 'Puebla'}, 58.3], [{v: 'MX-MIC', f: 'Michoacán'}, 45.6],
+                [{v: 'MX-HID', f: 'Hidalgo'}, 43.8], [{v: 'MX-TAB', f: 'Tabasco'}, 43.5], [{v: 'MX-ZAC', f: 'Zacatecas'}, 42.4],
+                [{v: 'MX-SLP', f: 'San Luis Potosí'}, 41.9]
+            ]),
+            { ...tOptions, region: 'MX', resolution: 'provinces', colorAxis: {colors: ['#ffe0b2', '#bf360c']} }
+        );
+      }
+    </script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; color: #333; }
+        header { background-color: #5972b8; color: white; padding: 40px 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        header h1 { margin: 0; font-size: 35px; }
+        header p { margin-top: 10px; font-size: 16px; opacity: 0.9; max-width: 800px; margin-left: auto; margin-right: auto; }
+        
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        
+        .section-wrapper { display: flex; flex-wrap: wrap; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 40px; overflow: hidden; }
+        .text-content { flex: 1; min-width: 350px; padding: 30px; border-right: 1px solid #eee; }
+        .chart-container { flex: 1; min-width: 350px; padding: 20px; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+        
+        h2 { color: #1a237e; font-size: 22px; margin-top: 0; border-bottom: 2px solid #e8eaf6; padding-bottom: 10px; }
+        p { line-height: 1.6; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+        th, td { padding: 12px 15px; text-align: center; border-bottom: 1px solid #ddd; }
+        th { background-color: #f5f5f5; color: #1a237e; font-weight: bold; }
+        tr:hover { background-color: #f9f9f9; }
+        
+        blockquote { border-left: 4px solid #3f51b5; background-color: #e8eaf6; margin: 20px 0; padding: 15px; border-radius: 0 8px 8px 0; font-size: 14px; color: #1a237e; }
+        
+        .conclusion { background: #1a237e; color: white; padding: 40px; border-radius: 8px; text-align: center; margin-top: 20px; }
+        .conclusion h2 { color: white; border-bottom: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>10 Años de Medición de Pobreza en México</h1>
+        <p>Reporte detallado de la evolución de la pobreza en México (CONEVAL 2008-2018)</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Sección 1 -->
+        <div class="section-wrapper">
+            <div class="text-content">
+                <h2>1. Dinámica de Ingresos vs Pobreza</h2>
+                <p>A pesar de una ligera disminución en la pobreza multidimensional, el porcentaje de población con un ingreso inferior a la línea de pobreza (canasta básica) se mantuvo estancado. Esto explica por qué la reducción no fue más pronunciada.</p>
+                <table>
+                    <tr><th>Indicador</th><th>2008 (%)</th><th>2018 (%)</th><th>Variación</th></tr>
+                    <tr><td>Pobreza General</td><td>44.4</td><td>41.9</td><td>-2.5 pts</td></tr>
+                    <tr><td>Ingreso Inf. Canasta</td><td>49.0</td><td>48.8</td><td>-0.2 pts</td></tr>
+                </table>
+            </div>
+            <div id="chart1_div" class="chart-container"></div>
+        </div>
+
+        <!-- Sección 2 -->
+        <div class="section-wrapper">
+            <div class="text-content">
+                <h2>2. Evolución de Líneas de Bienestar</h2>
+                <p>El comportamiento de la pobreza durante la década no fue lineal. Tras incrementos sostenidos hasta 2014, a partir de 2016 se consolidó una tendencia a la baja, destacando una reducción importante en la pobreza extrema.</p>
+                <table>
+                    <tr><th>Año</th><th>Pobreza General (%)</th><th>Pobreza Extrema (%)</th></tr>
+                    <tr><td>2008</td><td>44.4</td><td>11.0</td></tr>
+                    <tr><td>2014 (Pico Máximo)</td><td>46.2</td><td>9.5</td></tr>
+                    <tr><td>2018</td><td>41.9</td><td>7.4</td></tr>
+                </table>
+            </div>
+            <div id="chart2_div" class="chart-container"></div>
+        </div>
+
+        <!-- Sección 3 -->
+        <div class="section-wrapper">
+            <div class="text-content">
+                <h2>3. Brecha en Carencias Sociales</h2>
+                <p>Se observan avances significativos, particularmente en el acceso a los servicios de salud gracias a la expansión de infraestructura. Sin embargo, la seguridad social sigue siendo el mayor reto estructural de política pública.</p>
+                <table>
+                    <tr><th>Carencia Social</th><th>2008 (%)</th><th>2018 (%)</th><th>Reducción</th></tr>
+                    <tr><td>Rezago Educativo</td><td>21.9</td><td>16.9</td><td>-5.0 pts</td></tr>
+                    <tr><td>Acceso a la Salud</td><td>38.4</td><td>16.2</td><td>-22.2 pts</td></tr>
+                    <tr><td>Seguridad Social</td><td>65.0</td><td>57.3</td><td>-7.7 pts</td></tr>
+                </table>
+            </div>
+            <div id="chart3_div" class="chart-container"></div>
+        </div>
+
+        <!-- Sección 4 -->
+        <div class="section-wrapper">
+            <div class="text-content">
+                <h2>4. Intensidad de Pobreza</h2>
+                <p>La intensidad de la pobreza mide qué tan profunda es la vulnerabilidad a través del número de carencias que padece la población en promedio.</p>
+                <table>
+                    <tr><th>Grupo Poblacional</th><th>Promedio de Carencias</th></tr>
+                    <tr><td>En Pobreza</td><td>2.2</td></tr>
+                    <tr><td>Vulnerable</td><td>1.8</td></tr>
+                </table>
+                <blockquote><strong>Nota:</strong> Un promedio de 2.2 carencias significa que una persona carece simultáneamente de acceso a dos derechos sociales básicos (ej. salud y seguridad social), además de no contar con ingresos suficientes.</blockquote>
+            </div>
+            <div id="chart4_div" class="chart-container"></div>
+        </div>
+
+        <!-- Sección 5 -->
+            <div class="section-wrapper">
+            <div class="text-content" style="flex: 0.8; padding-right: 15px;">
+                <h2>5. Top 10 Estados con Mayor Pobreza</h2>
+                <p style="font-size: 14px; margin-bottom: 10px;">La desigualdad territorial es evidente. El rezago se concentra en la región sur-sureste y centro del país.</p>
+                <table style="font-size: 12px; margin-top: 10px;">
+                    <tr>
+                        <th style="padding: 6px 10px;">Pos.</th>
+                        <th style="padding: 6px 10px;">Estado</th>
+                        <th style="padding: 6px 10px;">Pobreza 2018 (%)</th>
+                    </tr>
+                    <tr><td style="padding: 6px 10px;">1</td><td style="padding: 6px 10px;">Chiapas</td><td style="padding: 6px 10px;">76.4</td></tr>
+                    <tr><td style="padding: 6px 10px;">2</td><td style="padding: 6px 10px;">Guerrero</td><td style="padding: 6px 10px;">66.5</td></tr>
+                    <tr><td style="padding: 6px 10px;">3</td><td style="padding: 6px 10px;">Oaxaca</td><td style="padding: 6px 10px;">66.4</td></tr>
+                    <tr><td style="padding: 6px 10px;">4</td><td style="padding: 6px 10px;">Veracruz</td><td style="padding: 6px 10px;">61.8</td></tr>
+                    <tr><td style="padding: 6px 10px;">5</td><td style="padding: 6px 10px;">Puebla</td><td style="padding: 6px 10px;">58.3</td></tr>
+                    <tr><td style="padding: 6px 10px;">6</td><td style="padding: 6px 10px;">Michoacán</td><td style="padding: 6px 10px;">45.6</td></tr>
+                    <tr><td style="padding: 6px 10px;">7</td><td style="padding: 6px 10px;">Hidalgo</td><td style="padding: 6px 10px;">43.8</td></tr>
+                    <tr><td style="padding: 6px 10px;">8</td><td style="padding: 6px 10px;">Tabasco</td><td style="padding: 6px 10px;">43.5</td></tr>
+                    <tr><td style="padding: 6px 10px;">9</td><td style="padding: 6px 10px;">Zacatecas</td><td style="padding: 6px 10px;">42.4</td></tr>
+                    <tr><td style="padding: 6px 10px;">10</td><td style="padding: 6px 10px;">San Luis Potosí</td><td style="padding: 6px 10px;">41.9</td></tr>
+                </table>
+            </div>
+            <div id="chart5_div" class="chart-container" style="flex: 1.2; min-height: 450px;"></div>
+        </div>
+    </div>
+</body>
+</html>
